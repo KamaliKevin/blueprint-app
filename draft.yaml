@@ -1,0 +1,49 @@
+models:
+  - Conference:
+      name: string
+      city: string
+      country: string
+      postal_code: string
+      relationships:
+        hasMany: Venue, Talk, Speaker
+
+  - Venue:
+      name: string
+      description: text
+      start_date: datetime
+      end_date: datetime
+      status: enum[pending, ongoing, completed]
+      region: string
+      relationships:
+        belongsTo: Conference
+
+  - Speaker:
+      name: string
+      email: string
+      bio: text
+      twitter: string
+      relationships:
+        hasMany: Talk
+        belongsToMany: Conference
+
+  - Talk:
+      title: string
+      description: text
+      relationships:
+        belongsTo: Speaker
+        belongsToMany: Conference
+
+controllers:
+  - Conference:
+      resource
+
+  - Venue:
+      resource
+
+  - Speaker:
+      resource
+
+  - Talk:
+      resource
+
+seeders: Conference, Venue, Speaker, Talk
